@@ -25,3 +25,16 @@ def createPDF(paths:list[str], output):
 
     # Abrir el archivo PDF
     os.startfile(output)
+
+def dividePDF(path:str):
+    # Abrir el archivo PDF
+    pdf_reader = PdfReader(path)
+    # Crear un PDF para cada página del PDF original
+    for page in range(len(pdf_reader.pages)):
+        pdf_writer = PdfWriter()
+        pdf_writer.add_page(pdf_reader.pages[page])
+        output = f'PDF_dividido_{page}.pdf' #f'{os.path.basename(path)}_page_{page}.pdf'
+        with open(output, 'wb') as out_file:
+            pdf_writer.write(out_file)
+        # Abrir el archivo PDF
+        #os.startfile(output)
